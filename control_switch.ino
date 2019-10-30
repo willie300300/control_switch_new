@@ -20,10 +20,10 @@ long lastDebounceTime2 = 0;
 long lastDebounceTime3 = 0;
 long lastDebounceTime4 = 0;                    
 long debounceDelay = 50;
-int bs1;
-int bs2;
-int bs3;
-int bs4;
+int bs1 = LOW;
+int bs2 = LOW;
+int bs3 = LOW;
+int bs4 = LOW;
 
 void setup() {
     pinMode(relay1, OUTPUT);
@@ -92,7 +92,7 @@ void loop() {
     lastButtonState2 = button2_State;
 
     
-    // ======按鈕一關閉功能======
+    // ======按鈕一關閉功能(兩個開關需同時關閉)======
     
     if (button1_State != lastButtonState1){
         lastDebounceTime3 = millis();
@@ -100,7 +100,7 @@ void loop() {
     if ((millis() - lastDebounceTime3) > debounceDelay) {
         if (button1_State != bs3) {
             bs3 = button1_State;
-            if (bs3 == LOW) {
+            if (bs3 == LOW  && bs4 == LOW) {
                 digitalWrite(relay1, LOW);
                 digitalWrite(relay2, LOW);
                 digitalWrite(relay3, LOW);
@@ -113,7 +113,7 @@ void loop() {
     }
     lastButtonState1 = button1_State;
 
-    // ======按鈕二關閉功能======
+    // ======按鈕二關閉功能(兩個開關需同時關閉)======
 
     if (button2_State != lastButtonState2){
         lastDebounceTime4 = millis();
@@ -121,7 +121,7 @@ void loop() {
     if ((millis() - lastDebounceTime4) > debounceDelay) {
         if (button2_State != bs4) {
             bs4 = button2_State;
-            if (bs4 == LOW) {
+            if (bs4 == LOW  && bs3 == LOW) {
                 digitalWrite(relay1, LOW);
                 digitalWrite(relay2, LOW);
                 digitalWrite(relay3, LOW);
