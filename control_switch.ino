@@ -2,61 +2,96 @@
    描述：控制7個開關
    
 */
+
   
-  
-int ledPin1 = 13;
-int ledPin2 = 12;
-int ledPin3 = 11;
-int ledPin4 = 10;
-int ledPin5 = 9;
-int ledPin6 = 8;
-int ledPin7 = 7;
+int relay1 = 13;
+int relay2 = 12;
+int relay3 = 11;
+int relay4 = 10;
+int relay5 = 9;
+int relay6 = 8;
+int relay7 = 7;
 
 
 void setup() {
-    pinMode(ledPin1, OUTPUT);
-    pinMode(ledPin2, OUTPUT);
-    pinMode(ledPin3, OUTPUT);
-    pinMode(ledPin4, OUTPUT);
-    pinMode(ledPin5, OUTPUT);
-    pinMode(ledPin6, OUTPUT);
-    pinMode(ledPin7, OUTPUT);
+    pinMode(relay1, OUTPUT);
+    pinMode(relay2, OUTPUT);
+    pinMode(relay3, OUTPUT);
+    pinMode(relay4, OUTPUT);
+    pinMode(relay5, OUTPUT);
+    pinMode(relay6, OUTPUT);
+    pinMode(relay7, OUTPUT);
 }
 
 
 void loop() {
-    digitalWrite(ledPin1,HIGH);
+    digitalWrite(relay1,HIGH);
     delay(1000);
-    digitalWrite(ledPin1,LOW);
+    digitalWrite(relay1,LOW);
     delay(1000);
     
-    digitalWrite(ledPin2,HIGH);
+    digitalWrite(relay2,HIGH);
     delay(1000);
-    digitalWrite(ledPin2,LOW);
+    digitalWrite(relay2,LOW);
     delay(1000);
             
-    digitalWrite(ledPin3,HIGH);
+    digitalWrite(relay3,HIGH);
     delay(1000);
-    digitalWrite(ledPin3,LOW);
-    delay(1000);
-
-    digitalWrite(ledPin4,HIGH);
-    delay(1000);
-    digitalWrite(ledPin4,LOW);
+    digitalWrite(relay3,LOW);
     delay(1000);
 
-    digitalWrite(ledPin5,HIGH);
+    digitalWrite(relay4,HIGH);
     delay(1000);
-    digitalWrite(ledPin5,LOW);
+    digitalWrite(relay4,LOW);
     delay(1000);
 
-    digitalWrite(ledPin6,HIGH);
+    digitalWrite(relay5,HIGH);
     delay(1000);
-    digitalWrite(ledPin6,LOW);
+    digitalWrite(relay5,LOW);
+    delay(1000);
+
+    digitalWrite(relay6,HIGH);
+    delay(1000);
+    digitalWrite(relay6,LOW);
     delay(1000);   
 
-    digitalWrite(ledPin7,HIGH);
+    digitalWrite(relay7,HIGH);
     delay(1000);
-    digitalWrite(ledPin7,LOW);
+    digitalWrite(relay7,LOW);
     delay(1000);                             
+}
+
+
+void control_relay1(){
+
+}
+
+
+void control_relay2(){
+
+}
+
+
+void control_relay3(){
+
+}
+
+
+void control_relay4(){
+
+}
+
+
+void control_relay5(){
+
+}
+
+
+void control_relay6(){
+
+}
+
+
+void control_relay7(){
+
 }
