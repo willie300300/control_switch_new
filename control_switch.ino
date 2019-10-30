@@ -16,11 +16,14 @@ int button2 = 5;
 int lastButtonState1 = LOW;
 int lastButtonState2 = LOW;
 long lastDebounceTime1 = 0;
-long lastDebounceTime2 = 0;                    
+long lastDebounceTime2 = 0;
+long lastDebounceTime3 = 0;
+long lastDebounceTime4 = 0;                    
 long debounceDelay = 50;
 int bs1;
 int bs2;
-
+int bs3;
+int bs4;
 
 void setup() {
     pinMode(relay1, OUTPUT);
@@ -40,7 +43,7 @@ void loop() {
     int button1_State = digitalRead(button1);
     int button2_State = digitalRead(button2);
     
-    // ======按鈕一開始======
+    // ======按鈕一啟動功能======
     
     if (button1_State != lastButtonState1){
         lastDebounceTime1 = millis();
@@ -61,14 +64,14 @@ void loop() {
     }
     lastButtonState1 = button1_State;
 
-    // ======按鈕二開始======
+    // ======按鈕二啟動功能======
 
     if (button2_State != lastButtonState2){
         lastDebounceTime2 = millis();
     }
     if ((millis() - lastDebounceTime2) > debounceDelay) {
         if (button2_State != bs2) {
-            bs2 = button1_State;
+            bs2 = button2_State;
             if (bs2 == HIGH) {
                 control_relay1();  
                 control_relay2();
@@ -81,6 +84,49 @@ void loop() {
         }
     }
     lastButtonState2 = button2_State;
+
+    
+    // ======按鈕一關閉功能======
+    
+    if (button1_State != lastButtonState1){
+        lastDebounceTime3 = millis();
+    }
+    if ((millis() - lastDebounceTime3) > debounceDelay) {
+        if (button1_State != bs3) {
+            bs3 = button1_State;
+            if (bs3 == LOW) {
+                control_relay1();  
+                control_relay2();
+                control_relay3();
+                control_relay4();
+                control_relay5();
+                control_relay6();
+                control_relay7();
+            }
+        }
+    }
+    lastButtonState1 = button1_State;
+
+    // ======按鈕二關閉功能======
+
+    if (button2_State != lastButtonState2){
+        lastDebounceTime4 = millis();
+    }
+    if ((millis() - lastDebounceTime4) > debounceDelay) {
+        if (button2_State != bs4) {
+            bs4 = button2_State;
+            if (bs4 == LOW) {
+                control_relay1();  
+                control_relay2();
+                control_relay3();
+                control_relay4();
+                control_relay5();
+                control_relay6();
+                control_relay7();
+            }
+        }
+    }
+    lastButtonState2 = button2_State;    
     
         
 }
