@@ -35,7 +35,13 @@ void setup() {
     pinMode(relay7, OUTPUT);
     pinMode(button1, INPUT);
     pinMode(button2, INPUT);
-    
+    digitalWrite(relay1, LOW);
+    digitalWrite(relay2, LOW);
+    digitalWrite(relay3, LOW);
+    digitalWrite(relay4, LOW);
+    digitalWrite(relay5, LOW);
+    digitalWrite(relay6, LOW);
+    digitalWrite(relay7, LOW);
 }
 
 
@@ -95,13 +101,13 @@ void loop() {
         if (button1_State != bs3) {
             bs3 = button1_State;
             if (bs3 == LOW) {
-                control_relay1();  
-                control_relay2();
-                control_relay3();
-                control_relay4();
-                control_relay5();
-                control_relay6();
-                control_relay7();
+                digitalWrite(relay1, LOW);
+                digitalWrite(relay2, LOW);
+                digitalWrite(relay3, LOW);
+                digitalWrite(relay4, LOW);
+                digitalWrite(relay5, LOW);
+                digitalWrite(relay6, LOW);
+                digitalWrite(relay7, LOW);
             }
         }
     }
@@ -116,13 +122,13 @@ void loop() {
         if (button2_State != bs4) {
             bs4 = button2_State;
             if (bs4 == LOW) {
-                control_relay1();  
-                control_relay2();
-                control_relay3();
-                control_relay4();
-                control_relay5();
-                control_relay6();
-                control_relay7();
+                digitalWrite(relay1, LOW);
+                digitalWrite(relay2, LOW);
+                digitalWrite(relay3, LOW);
+                digitalWrite(relay4, LOW);
+                digitalWrite(relay5, LOW);
+                digitalWrite(relay6, LOW);
+                digitalWrite(relay7, LOW);
             }
         }
     }
