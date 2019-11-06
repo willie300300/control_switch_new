@@ -15,6 +15,8 @@ int button1 = 6; //火警派遣按鈕
 int button2 = 5; //火警預派遣按鈕
 int lastButtonState1 = LOW;
 int lastButtonState2 = LOW;
+int lastButtonState3 = LOW;
+int lastButtonState4 = LOW;
 long lastDebounceTime1 = 0;
 long lastDebounceTime2 = 0;
 long lastDebounceTime3 = 0;
@@ -49,8 +51,7 @@ void setup() {
 void loop() {
     int button1_State = digitalRead(button1);
     int button2_State = digitalRead(button2);
-    
-    Serial.println(button1_State);
+   
 
     // ======按鈕一啟動功能(火警派遣按鈕)======
     
@@ -88,7 +89,7 @@ void loop() {
     
     // ======按鈕一關閉功能(兩個開關需同時關閉)======
     
-    if (button1_State != lastButtonState1){
+    if (button1_State != lastButtonState3){
         lastDebounceTime3 = millis();
     }
     if ((millis() - lastDebounceTime3) > debounceDelay) {
@@ -110,7 +111,7 @@ void loop() {
 
     // ======按鈕二關閉功能(兩個開關需同時關閉)======
 
-    if (button2_State != lastButtonState2){
+    if (button2_State != lastButtonState4){
         lastDebounceTime4 = millis();
     }
     if ((millis() - lastDebounceTime4) > debounceDelay) {
