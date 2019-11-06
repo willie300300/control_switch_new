@@ -4,15 +4,15 @@
 */
 
   
-int relay1 = 13;
-int relay2 = 12;
-int relay3 = 11;
-int relay4 = 10;
-int relay5 = 9;
-int relay6 = 8;
-int relay7 = 7;
-int button1 = 6;
-int button2 = 5;
+int relay1 = 4; //火警燈開關
+int relay2 = 12; //火警鈴開關
+int relay3 = 11; //倒數計時器開啟開關
+int relay4 = 10; //倒數計時器賦歸開關
+int relay5 = 9; //廣播器「全區」按鈕
+int relay6 = 8; //廣播器「賦歸」按鈕
+int relay7 = 7; //廣播器「廣播」按鈕
+int button1 = 6; //火警派遣按鈕
+int button2 = 5; //火警預派遣按鈕
 int lastButtonState1 = LOW;
 int lastButtonState2 = LOW;
 long lastDebounceTime1 = 0;
@@ -29,7 +29,7 @@ void setup() {
     pinMode(relay1, OUTPUT);
     pinMode(relay2, OUTPUT);
     pinMode(relay3, OUTPUT);
-    pinMode(relay4, OUTPUT);
+    pinMode(relay4, OUTPUT);  
     pinMode(relay5, OUTPUT);
     pinMode(relay6, OUTPUT);
     pinMode(relay7, OUTPUT);
@@ -42,6 +42,7 @@ void setup() {
     digitalWrite(relay5, LOW);
     digitalWrite(relay6, LOW);
     digitalWrite(relay7, LOW);
+    Serial.begin(9600);
 }
 
 
@@ -49,7 +50,9 @@ void loop() {
     int button1_State = digitalRead(button1);
     int button2_State = digitalRead(button2);
     
-    // ======按鈕一啟動功能======
+    Serial.println(button1_State);
+
+    // ======按鈕一啟動功能(火警派遣按鈕)======
     
     if (button1_State != lastButtonState1){
         lastDebounceTime1 = millis();
@@ -58,19 +61,14 @@ void loop() {
         if (button1_State != bs1) {
             bs1 = button1_State;
             if (bs1 == HIGH) {
-                control_relay1();  
-                control_relay2();
-                control_relay3();
-                control_relay4();
-                control_relay5();
-                control_relay6();
-                control_relay7();
+                Serial.println("開啟火警功能");
+                fire_alarm();
             }
         }
     }
     lastButtonState1 = button1_State;
 
-    // ======按鈕二啟動功能======
+    // ======按鈕二啟動功能(火警預派遣按鈕)======
 
     if (button2_State != lastButtonState2){
         lastDebounceTime2 = millis();
@@ -79,13 +77,9 @@ void loop() {
         if (button2_State != bs2) {
             bs2 = button2_State;
             if (bs2 == HIGH) {
-                control_relay1();  
-                control_relay2();
-                control_relay3();
-                control_relay4();
-                control_relay5();
-                control_relay6();
-                control_relay7();
+                Serial.println("開啟預派遣功能");
+                advance(); 
+
             }
         }
     }
@@ -101,6 +95,7 @@ void loop() {
         if (button1_State != bs3) {
             bs3 = button1_State;
             if (bs3 == LOW  && bs4 == LOW) {
+                Serial.println("關閉功能");
                 digitalWrite(relay1, LOW);
                 digitalWrite(relay2, LOW);
                 digitalWrite(relay3, LOW);
@@ -122,6 +117,7 @@ void loop() {
         if (button2_State != bs4) {
             bs4 = button2_State;
             if (bs4 == LOW  && bs3 == LOW) {
+                Serial.println("關閉功能");
                 digitalWrite(relay1, LOW);
                 digitalWrite(relay2, LOW);
                 digitalWrite(relay3, LOW);
@@ -143,6 +139,7 @@ void control_relay1(){
     delay(1000);
     digitalWrite(relay1,LOW);
     delay(1000);
+    digitalWrite(relay1,HIGH);
 }
 
 
@@ -151,6 +148,7 @@ void control_relay2(){
     delay(1000);
     digitalWrite(relay2,LOW);
     delay(1000);
+    digitalWrite(relay2,HIGH);
 }
 
 
@@ -159,6 +157,7 @@ void control_relay3(){
     delay(1000);
     digitalWrite(relay3,LOW);
     delay(1000);
+    digitalWrite(relay3,HIGH);
 }
 
 
@@ -167,6 +166,7 @@ void control_relay4(){
     delay(1000);
     digitalWrite(relay4,LOW);
     delay(1000);
+    digitalWrite(relay4,HIGH);
 }
 
 
@@ -175,6 +175,7 @@ void control_relay5(){
     delay(1000);
     digitalWrite(relay5,LOW);
     delay(1000);
+    digitalWrite(relay5,HIGH);
 }
 
 
@@ -182,7 +183,8 @@ void control_relay6(){
     digitalWrite(relay6,HIGH);
     delay(1000);
     digitalWrite(relay6,LOW);
-    delay(1000); 
+    delay(1000);
+    digitalWrite(relay6,HIGH); 
 }
 
 
@@ -190,5 +192,40 @@ void control_relay7(){
     digitalWrite(relay7,HIGH);
     delay(1000);
     digitalWrite(relay7,LOW);
-    delay(1000); 
+    delay(1000);
+    digitalWrite(relay7,HIGH); 
+}
+
+
+//火警派遣功能
+void fire_alarm(){
+    digitalWrite(relay1,HIGH); //開起火警燈
+    digitalWrite(relay3,HIGH); //開啟倒數計時器
+    //開啟廣播
+    digitalWrite(relay5,HIGH); //按下「全區」
+    delay(200);
+    digitalWrite(relay7,HIGH); //按下「廣播」
+    //按火警鈴
+    digitalWrite(relay2,HIGH); //火警鈴開啟
+    delay(1000);
+    digitalWrite(relay2,LOW); 
+    delay(500);
+    digitalWrite(relay2,HIGH);
+    delay(1000);
+    digitalWrite(relay2,LOW);
+    delay(500);
+    digitalWrite(relay2,HIGH);
+    delay(1000);
+    digitalWrite(relay2,LOW);
+
+}
+
+
+//火警預派遣功能
+void advance(){
+    digitalWrite(relay1,HIGH); //開起火警燈
+    digitalWrite(relay5,HIGH); //按下「全區」
+    delay(200);
+    digitalWrite(relay7,HIGH); //按下「廣播」    
+
 }
