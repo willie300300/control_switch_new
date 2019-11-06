@@ -97,17 +97,11 @@ void loop() {
             bs3 = button1_State;
             if (bs3 == LOW  && bs4 == LOW) {
                 Serial.println("關閉功能");
-                digitalWrite(relay1, LOW);
-                digitalWrite(relay2, LOW);
-                digitalWrite(relay3, LOW);
-                digitalWrite(relay4, LOW);
-                digitalWrite(relay5, LOW);
-                digitalWrite(relay6, LOW);
-                digitalWrite(relay7, LOW);
+                close_function();
             }
         }
     }
-    lastButtonState1 = button1_State;
+    lastButtonState3 = button1_State;
 
     // ======按鈕二關閉功能(兩個開關需同時關閉)======
 
@@ -119,17 +113,11 @@ void loop() {
             bs4 = button2_State;
             if (bs4 == LOW  && bs3 == LOW) {
                 Serial.println("關閉功能");
-                digitalWrite(relay1, LOW);
-                digitalWrite(relay2, LOW);
-                digitalWrite(relay3, LOW);
-                digitalWrite(relay4, LOW);
-                digitalWrite(relay5, LOW);
-                digitalWrite(relay6, LOW);
-                digitalWrite(relay7, LOW);
+                close_function();
             }
         }
     }
-    lastButtonState2 = button2_State;    
+    lastButtonState4 = button2_State;    
     
         
 }
@@ -208,17 +196,16 @@ void fire_alarm(){
     digitalWrite(relay7, HIGH); //按下「廣播」
     //按火警鈴
     digitalWrite(relay2, HIGH); //火警鈴開啟
-    delay(1000);
+    delay(800);
     digitalWrite(relay2, LOW); 
-    delay(500);
+    delay(400);
     digitalWrite(relay2, HIGH);
-    delay(1000);
+    delay(800);
     digitalWrite(relay2, LOW);
-    delay(500);
+    delay(400);
     digitalWrite(relay2, HIGH);
-    delay(1000);
+    delay(800);
     digitalWrite(relay2, LOW);
-
 }
 
 
@@ -229,4 +216,18 @@ void advance(){
     delay(200);
     digitalWrite(relay7, HIGH); //按下「廣播」    
 
+}
+
+
+//關閉功能
+void close_function(){
+    digitalWrite(relay1, LOW);
+    digitalWrite(relay2, LOW);
+    digitalWrite(relay3, LOW);
+    digitalWrite(relay4, HIGH);
+    delay(500);
+    digitalWrite(relay4, LOW);
+    digitalWrite(relay5, LOW);
+    digitalWrite(relay6, LOW);
+    digitalWrite(relay7, LOW);
 }
