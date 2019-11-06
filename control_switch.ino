@@ -135,97 +135,97 @@ void loop() {
 
 
 void control_relay1(){
-    digitalWrite(relay1,HIGH);
+    digitalWrite(relay1, HIGH);
     delay(1000);
-    digitalWrite(relay1,LOW);
+    digitalWrite(relay1, LOW);
     delay(1000);
-    digitalWrite(relay1,HIGH);
+    digitalWrite(relay1, HIGH);
 }
 
 
 void control_relay2(){
-    digitalWrite(relay2,HIGH);
+    digitalWrite(relay2, HIGH);
     delay(1000);
-    digitalWrite(relay2,LOW);
+    digitalWrite(relay2, LOW);
     delay(1000);
-    digitalWrite(relay2,HIGH);
+    digitalWrite(relay2, HIGH);
 }
 
 
 void control_relay3(){
-    digitalWrite(relay3,HIGH);
+    digitalWrite(relay3, HIGH);
     delay(1000);
-    digitalWrite(relay3,LOW);
+    digitalWrite(relay3, LOW);
     delay(1000);
-    digitalWrite(relay3,HIGH);
+    digitalWrite(relay3, HIGH);
 }
 
 
 void control_relay4(){
-    digitalWrite(relay4,HIGH);
+    digitalWrite(relay4, HIGH);
     delay(1000);
-    digitalWrite(relay4,LOW);
+    digitalWrite(relay4, LOW);
     delay(1000);
-    digitalWrite(relay4,HIGH);
+    digitalWrite(relay4, HIGH);
 }
 
 
 void control_relay5(){
-    digitalWrite(relay5,HIGH);
+    digitalWrite(relay5, HIGH);
     delay(1000);
-    digitalWrite(relay5,LOW);
+    digitalWrite(relay5, LOW);
     delay(1000);
-    digitalWrite(relay5,HIGH);
+    digitalWrite(relay5, HIGH);
 }
 
 
 void control_relay6(){
-    digitalWrite(relay6,HIGH);
+    digitalWrite(relay6, HIGH);
     delay(1000);
-    digitalWrite(relay6,LOW);
+    digitalWrite(relay6, LOW);
     delay(1000);
-    digitalWrite(relay6,HIGH); 
+    digitalWrite(relay6, HIGH); 
 }
 
 
 void control_relay7(){
-    digitalWrite(relay7,HIGH);
+    digitalWrite(relay7, HIGH);
     delay(1000);
-    digitalWrite(relay7,LOW);
+    digitalWrite(relay7, LOW);
     delay(1000);
-    digitalWrite(relay7,HIGH); 
+    digitalWrite(relay7, HIGH); 
 }
 
 
 //火警派遣功能
 void fire_alarm(){
-    digitalWrite(relay1,HIGH); //開起火警燈
-    digitalWrite(relay3,HIGH); //開啟倒數計時器
+    digitalWrite(relay1, HIGH); //開起火警燈
+    digitalWrite(relay3, HIGH); //開啟倒數計時器
     //開啟廣播
     digitalWrite(relay5,HIGH); //按下「全區」
     delay(200);
-    digitalWrite(relay7,HIGH); //按下「廣播」
+    digitalWrite(relay7, HIGH); //按下「廣播」
     //按火警鈴
-    digitalWrite(relay2,HIGH); //火警鈴開啟
+    digitalWrite(relay2, HIGH); //火警鈴開啟
     delay(1000);
-    digitalWrite(relay2,LOW); 
+    digitalWrite(relay2, LOW); 
     delay(500);
-    digitalWrite(relay2,HIGH);
+    digitalWrite(relay2, HIGH);
     delay(1000);
-    digitalWrite(relay2,LOW);
+    digitalWrite(relay2, LOW);
     delay(500);
-    digitalWrite(relay2,HIGH);
+    digitalWrite(relay2, HIGH);
     delay(1000);
-    digitalWrite(relay2,LOW);
+    digitalWrite(relay2, LOW);
 
 }
 
 
 //火警預派遣功能
 void advance(){
-    digitalWrite(relay1,HIGH); //開起火警燈
-    digitalWrite(relay5,HIGH); //按下「全區」
+    digitalWrite(relay1, HIGH); //開起火警燈
+    digitalWrite(relay5, HIGH); //按下「全區」
     delay(200);
-    digitalWrite(relay7,HIGH); //按下「廣播」    
+    digitalWrite(relay7, HIGH); //按下「廣播」    
 
 }
