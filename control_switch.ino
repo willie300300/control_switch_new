@@ -21,7 +21,7 @@ long lastDebounceTime1 = 0;
 long lastDebounceTime2 = 0;
 long lastDebounceTime3 = 0;
 long lastDebounceTime4 = 0;                    
-long debounceDelay = 50;
+long debounceDelay = 50; //消雜訊用
 int bs1 = LOW;
 int bs2 = LOW;
 int bs3 = LOW;
@@ -122,7 +122,7 @@ void loop() {
         
 }
 
-
+//測試relay時使用
 void control_relay1(){
     digitalWrite(relay1, HIGH);
     delay(1000);
@@ -132,6 +132,7 @@ void control_relay1(){
 }
 
 
+//測試relay時使用
 void control_relay2(){
     digitalWrite(relay2, HIGH);
     delay(1000);
@@ -141,6 +142,7 @@ void control_relay2(){
 }
 
 
+//測試relay時使用
 void control_relay3(){
     digitalWrite(relay3, HIGH);
     delay(1000);
@@ -150,6 +152,7 @@ void control_relay3(){
 }
 
 
+//測試relay時使用
 void control_relay4(){
     digitalWrite(relay4, HIGH);
     delay(1000);
@@ -159,6 +162,7 @@ void control_relay4(){
 }
 
 
+//測試relay時使用
 void control_relay5(){
     digitalWrite(relay5, HIGH);
     delay(1000);
@@ -168,6 +172,7 @@ void control_relay5(){
 }
 
 
+//測試relay時使用
 void control_relay6(){
     digitalWrite(relay6, HIGH);
     delay(1000);
@@ -177,6 +182,7 @@ void control_relay6(){
 }
 
 
+//測試relay時使用
 void control_relay7(){
     digitalWrite(relay7, HIGH);
     delay(1000);
