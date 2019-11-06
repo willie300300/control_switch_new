@@ -1,6 +1,5 @@
 /*
-   描述：控制7個開關
-   
+   描述：控制7個開關  
 */
 
   
@@ -26,6 +25,11 @@ int bs1 = LOW;
 int bs2 = LOW;
 int bs3 = LOW;
 int bs4 = LOW;
+//紅外線遙控器設定
+#include <IRremote.h> //调用 IRremote.h 库
+int RECV_PIN = 11; //定义 RECV_PIN 变量为 11
+IRrecv irrecv(RECV_PIN); //设置 RECV_PIN （也就是 11 引脚）为红外接收端
+decode_results results; //定义 results 变量为红外结果存放位置
 
 
 void setup() {
@@ -45,7 +49,9 @@ void setup() {
     digitalWrite(relay5, LOW);
     digitalWrite(relay6, LOW);
     digitalWrite(relay7, LOW);
-    Serial.begin(9600);
+    Serial.begin(9600); //串口波特率设为 9600
+    //紅外線遙控器設定
+    irrecv.enableIRIn(); // 启动红外解码
 }
 
 
@@ -116,6 +122,19 @@ void loop() {
         }
     }
     lastButtonState4 = button2_State;                
+
+
+    //======遙控器功能======
+    //是否接收到解码数据,把接收到的数据存储在变量results中
+    if (irrecv.decode(&results)) {  
+        //接收到的数据以16进制的方式在串口输出   
+        Serial.println(results.value, HEX);
+        //一旦接收到电源键的代码, 執行程式碼
+        if(results.value == 0xFD00FF){
+            Serial.println("進到if裡面了");
+        }     
+        irrecv.resume();  // 继续等待接收下一组信号
+    }    
 }
 
 
