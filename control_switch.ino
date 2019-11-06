@@ -27,6 +27,7 @@ int bs2 = LOW;
 int bs3 = LOW;
 int bs4 = LOW;
 
+
 void setup() {
     pinMode(relay1, OUTPUT);
     pinMode(relay2, OUTPUT);
@@ -53,8 +54,7 @@ void loop() {
     int button2_State = digitalRead(button2);
    
 
-    // ======按鈕一啟動功能(火警派遣按鈕)======
-    
+    // ======按鈕一啟動功能(火警派遣按鈕)======   
     if (button1_State != lastButtonState1){
         lastDebounceTime1 = millis();
     }
@@ -69,8 +69,8 @@ void loop() {
     }
     lastButtonState1 = button1_State;
 
-    // ======按鈕二啟動功能(火警預派遣按鈕)======
 
+    // ======按鈕二啟動功能(火警預派遣按鈕)======
     if (button2_State != lastButtonState2){
         lastDebounceTime2 = millis();
     }
@@ -80,15 +80,13 @@ void loop() {
             if (bs2 == HIGH) {
                 Serial.println("開啟預派遣功能");
                 advance(); 
-
             }
         }
     }
     lastButtonState2 = button2_State;
 
     
-    // ======按鈕一關閉功能(兩個開關需同時關閉)======
-    
+    // ======按鈕一關閉功能(兩個開關需同時關閉)======   
     if (button1_State != lastButtonState3){
         lastDebounceTime3 = millis();
     }
@@ -103,8 +101,8 @@ void loop() {
     }
     lastButtonState3 = button1_State;
 
-    // ======按鈕二關閉功能(兩個開關需同時關閉)======
 
+    // ======按鈕二關閉功能(兩個開關需同時關閉)======
     if (button2_State != lastButtonState4){
         lastDebounceTime4 = millis();
     }
@@ -117,10 +115,9 @@ void loop() {
             }
         }
     }
-    lastButtonState4 = button2_State;    
-    
-        
+    lastButtonState4 = button2_State;                
 }
+
 
 //測試relay時使用
 void control_relay1(){
@@ -197,7 +194,7 @@ void fire_alarm(){
     digitalWrite(relay1, HIGH); //開起火警燈
     digitalWrite(relay3, HIGH); //開啟倒數計時器
     //開啟廣播
-    digitalWrite(relay5,HIGH); //按下「全區」
+    digitalWrite(relay5, HIGH); //按下「全區」
     delay(200);
     digitalWrite(relay7, HIGH); //按下「廣播」
     //按火警鈴
