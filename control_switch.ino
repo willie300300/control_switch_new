@@ -27,8 +27,8 @@ int bs3 = LOW;
 int bs4 = LOW;
 //紅外線遙控器設定
 #include <IRremote.h> //调用 IRremote.h 库
-int RECV_PIN = 11; //定义 RECV_PIN 变量为 11
-IRrecv irrecv(RECV_PIN); //设置 RECV_PIN （也就是 11 引脚）为红外接收端
+int RECV_PIN = 3; //定义 RECV_PIN 变量为 3
+IRrecv irrecv(RECV_PIN); //设置 RECV_PIN （也就是 3 引脚）为红外接收端
 decode_results results; //定义 results 变量为红外结果存放位置
 
 
@@ -130,11 +130,23 @@ void loop() {
         //接收到的数据以16进制的方式在串口输出   
         Serial.println(results.value, HEX);
         //一旦接收到电源键的代码, 執行程式碼
-        if(results.value == 0xFD00FF){
-            Serial.println("進到if裡面了");
-        }     
+        //遙控器「1」=0xFF6897，「0x」是16進位的意思，沒加編譯不會過
+        if(results.value == 0xFF6897){
+            Serial.println("遙控器開啟火警功能");
+            fire_alarm();
+        }
+        //遙控器「2」=0xFF9867
+        if(results.value == 0xFF9867){
+            Serial.println("遙控器開啟預派遣功能");
+            advance();
+        }
+        //遙控器「3」=0xFFB04F
+        if(results.value == 0xFFB04F){
+            Serial.println("關閉功能");
+            close_function();
+        }                           
         irrecv.resume();  // 继续等待接收下一组信号
-    }    
+    }
 }
 
 
