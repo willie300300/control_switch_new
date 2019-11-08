@@ -227,6 +227,8 @@ void fire_alarm(){
     //開啟廣播
     digitalWrite(relay5, HIGH); //按下「全區」
     delay(200);
+    digitalWrite(relay5, LOW); //關閉「全區」
+    delay(200);
     digitalWrite(relay7, HIGH); //按下「廣播」
     //按火警鈴
     digitalWrite(relay2, HIGH); //火警鈴開啟
@@ -248,8 +250,9 @@ void advance(){
     digitalWrite(relay1, HIGH); //開起火警燈
     digitalWrite(relay5, HIGH); //按下「全區」
     delay(200);
+    digitalWrite(relay5, LOW); //關閉「全區」
+    delay(200);
     digitalWrite(relay7, HIGH); //按下「廣播」    
-
 }
 
 
