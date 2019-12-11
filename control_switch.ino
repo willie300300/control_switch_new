@@ -1,8 +1,9 @@
 /*
    描述：控制7個開關  
 */
-
-  
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);  
 int relay1 = 4; //火警燈開關
 int relay2 = 12; //火警鈴開關
 int relay3 = 11; //倒數計時器開啟開關
@@ -52,10 +53,23 @@ void setup() {
     Serial.begin(9600); //串口波特率设为 9600
     //紅外線遙控器設定
     irrecv.enableIRIn(); // 启动红外解码
+    //initialize the LCD
+    lcd.begin();
+    //Turn on the blacklight and print a message.
+    lcd.backlight();
+    //lcd.print("Hello, world!");
+    //lcd.clear();
+    //lcd.print("Cursor blink");
+    lcd.setCursor(0, 0); // 設定游標位置在第一行行首
+    lcd.print("System Ready");
+    //delay(1000);
+    //lcd.setCursor(0, 1); // 設定游標位置在第二行行首
+    //lcd.print("Hello, Maker!");
 }
 
 
 void loop() {
+
     int button1_State = digitalRead(button1);
     int button2_State = digitalRead(button2);
    
@@ -68,6 +82,7 @@ void loop() {
         if (button1_State != bs1) {
             bs1 = button1_State;
             if (bs1 == HIGH) {
+                lcd_function(1);               
                 Serial.println("開啟火警功能");
                 fire_alarm();
             }
@@ -84,8 +99,9 @@ void loop() {
         if (button2_State != bs2) {
             bs2 = button2_State;
             if (bs2 == HIGH) {
+                lcd_function(2);                            
                 Serial.println("開啟預派遣功能");
-                advance(); 
+                advance();
             }
         }
     }
@@ -100,6 +116,7 @@ void loop() {
         if (button1_State != bs3) {
             bs3 = button1_State;
             if (bs3 == LOW  && bs4 == LOW) {
+                lcd_function(3);                 
                 Serial.println("關閉功能");
                 close_function();
             }
@@ -116,6 +133,7 @@ void loop() {
         if (button2_State != bs4) {
             bs4 = button2_State;
             if (bs4 == LOW  && bs3 == LOW) {
+                lcd_function(3);
                 Serial.println("關閉功能");
                 close_function();
             }
@@ -132,16 +150,19 @@ void loop() {
         //一旦接收到电源键的代码, 執行程式碼
         //遙控器「1」=0xFF6897，「0x」是16進位的意思，沒加編譯不會過
         if(results.value == 0xFF6897){
+            lcd_function(1); 
             Serial.println("遙控器開啟火警功能");
             fire_alarm();
         }
         //遙控器「2」=0xFF9867
         if(results.value == 0xFF9867){
+            lcd_function(2); 
             Serial.println("遙控器開啟預派遣功能");
             advance();
         }
         //遙控器「3」=0xFFB04F
         if(results.value == 0xFFB04F){
+            lcd_function(3);
             Serial.println("關閉功能");
             close_function();
         }                           
@@ -267,4 +288,24 @@ void close_function(){
     digitalWrite(relay5, LOW);
     digitalWrite(relay6, LOW);
     digitalWrite(relay7, LOW);
+}
+
+
+//LCD顯示功能
+void lcd_function(int(X)){
+    lcd.clear();
+    lcd.setCursor(0, 0); // 設定游標位置在第一行行首
+    lcd.print("System Ready");
+    if (X == 1){
+        lcd.setCursor(0, 1);
+        lcd.print("fire_alarm");
+    }
+    if (X == 2){
+        lcd.setCursor(0, 1);
+        lcd.print("fire_advance");
+    }
+    if (X == 3){
+        lcd.setCursor(0, 1);
+        lcd.print("close_function");
+    }
 }
